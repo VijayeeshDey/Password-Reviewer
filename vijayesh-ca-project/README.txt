@@ -1,5 +1,5 @@
 ================================================================================
-                    VIJAYESH CA PROJECT - PASSWORD SECURITY
+                   PASSWORD SECURITY
 ================================================================================
 
 PROJECT: Post-Breach Password Security Analysis
@@ -41,17 +41,9 @@ OPTION B - PYTHON DEMO (Recommended)
 5. Explain the results
 
 
-OPTION C - EXPLAIN THEORY
-──────────────────────────────────────────────
-1. Show Overview.md slide 5-7 (results)
-2. Explain why MD5 is insecure
-3. Show policy evaluation (slide 8-9)
-4. Give recommendations (slide 10)
 
 
-================================================================================
-                           WHAT TO SAY (KEY POINTS)
-================================================================================
+
 
 1. "We found 20 password hashes in the breach"
 2. "All hashes used MD5 algorithm (insecure since 2004)"
@@ -61,22 +53,6 @@ OPTION C - EXPLAIN THEORY
 6. "Organization had NO password policy"
 7. "Risk level: CRITICAL - 9.8/10"
 
-
-================================================================================
-                            COMMON QUESTIONS
-================================================================================
-
-Q: Why is MD5 bad?
-A: It's fast to compute (can try billions/second) and has no salt (vulnerable to rainbow tables)
-
-Q: What's the solution?
-A: Use bcrypt or Argon2 for hashing, add salt, enforce 12+ char passwords
-
-Q: What tools did you use?
-A: Hashcat, John the Ripper, CrackStation (online), Python
-
-Q: Is this legal?
-A: Yes - this is simulated breach data for educational purposes
 
 
 ================================================================================
@@ -97,20 +73,7 @@ A: Yes - this is simulated breach data for educational purposes
    - Analysis summary
 
 
-================================================================================
-                            EXAM/TEST READY
-================================================================================
 
-Quick Answers to Memorize:
-────────────────────────────────────────────
-Q: What hash type?        → MD5 (32 hex chars)
-Q: Crack success rate?   → 100% (20/20)
-Q: Time to crack?        → < 1 second
-Q: Password policy?      → NONE (not enforced)
-Q: Risk level?           → CRITICAL (9.8/10)
-Q: Use bcrypt/Argon2?    → YES - recommended
-Q: Salt needed?         → YES - unique per password
-Q: Min password length? → 12+ characters
 
 ================================================================================
                               GOOD LUCK!
