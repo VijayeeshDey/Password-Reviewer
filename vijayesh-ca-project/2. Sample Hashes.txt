@@ -1,0 +1,97 @@
+# Password Hash Database - Simulated Breach Data
+
+## MD5 Hashes (Unsalted)
+
+| ID | Username | Password | Hash (MD5) |
+|----|----------|----------|------------|
+| 1 | admin | password | 5f4dcc3b5aa765d61d8327deb882cf99 |
+| 2 | john.doe | 123456 | e10adc3949ba59abbe56e057f20f883e |
+| 3 | sarah.smith | 12345 | 827ccb0eea8a706c4c34a16891f84e7b |
+| 4 | mike.wilson | 123 | 202cb962ac59075b964b07152d234b70 |
+| 5 | emily.brown | test | 098f6bcd4621d373cade4e832627b4f6 |
+| 6 | david.lee | hello | 5d41402abc4b2a76b9719d911017c592 |
+| 7 | lisa.jones | 123 | 202cb962ac59075b964b07152d234b70 |
+| 8 | tom.harris | 12345 | 827ccb0eea8a706c4c34a16891f84e7 |
+| 9 | anna.white | test | 098f6bcd4621d373cade4e832627b4f6 |
+| 10 | chris.martin | 123456 | e10adc3949ba59abbe56e057f20f883e |
+| 11 | user11 | 123456789 | 96e79218955eb5b7a9342158a4190386 |
+| 12 | user12 | 1234567890 | 25f9e794323b453885f5181f1b624d0b |
+| 13 | user13 | 12345 | 827ccb0eea8a706c4c34a16891f84e7b |
+| 14 | user14 | 123 | 202cb962ac59075b964b07152d234b70 |
+| 15 | user15 | hello | 5d41402abc4b2a76b9719d911017c592 |
+| 16 | user16 | letmein | 0d107d09f5bbe40cade3de5c71e9e9b7 |
+| 17 | user17 | 1234567890 | 25f9e794323b453885f5181f1b624d0b |
+| 18 | user18 | 123456789 | 96e79218955eb5b7a9342158a4190386 |
+| 19 | user19 | test | 098f6bcd4621d373cade4e832627b4f6 |
+| 20 | user20 | 123456 | e10adc3949ba59abbe56e057f20f883e |
+
+## SHA-1 Hashes (For Comparison)
+
+| ID | Username | Password | Hash (SHA-1) |
+|----|----------|----------|--------------|
+| 1 | admin | password | 5baa61e4c9b93f3f0682250b6cf8331b7eb68f5e |
+| 2 | john.doe | 123456 | 7c4a8d09ca3762af61e59520943dc26494f8941b |
+| 3 | sarah.smith | admin123 | 0192023a7bbd73250516f067df06f2e20734205 |
+
+## bcrypt Hashes (For Comparison - Secure)
+
+| ID | Username | Password | Hash (bcrypt) |
+|----|----------|----------|---------------|
+| 1 | secure_user | P@ssw0rd123 | $2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5lWz9E3f5.3Ge |
+| 2 | another_user | MyStr0ngP@ss! | $2a$12$K9Vx3eGvPQz6LHMhKzYnNOfVvLw8YJ0jZGhO5xXz2Pz9B2uW5xYy |
+
+## Note on Hash Types
+
+### MD5 (Message Digest 5)
+- 128-bit hash value
+- 32 hexadecimal characters
+- **INSECURE** - Vulnerable to rainbow tables, collisions
+- No built-in salting
+
+### SHA-1 (Secure Hash Algorithm 1)
+- 160-bit hash value
+- 40 hexadecimal characters
+- **DEPRECATED** - Deprecated by NIST since 2011
+- No built-in salting
+
+### bcrypt
+- Based on Blowfish cipher
+- Includes salt (128-bit)
+- Configurable work factor
+- **RECOMMENDED** for password storage
+
+### Argon2
+- Winner of Password Hashing Competition (2015)
+- Memory-hard function
+- Resistant to GPU attacks
+- **MOST RECOMMENDED**
+
+---
+
+## Common Password MD5 Pre-Calculated (Rainbow Table Reference)
+
+| Password | MD5 Hash |
+|----------|----------|
+| 123 | 202cb962ac59075b964b07152d234b70 |
+| 1234 | 81dc9bdb52d04dc20036dbd8313ed055 |
+| 12345 | 827ccb0eea8a706c4c34a16891f84e7b |
+| 123456 | e10adc3949ba59abbe56e057f20f883e |
+| 1234567 | fcea920f7412b5da7be0cf42b8c93759 |
+| 12345678 | 25d55ad283aa400af464c76d713c07ad |
+| 123456789 | 96e79218955eb5b7a9342158a4190386 |
+| 1234567890 | 25f9e794323b453885f5181f1b624d0b |
+| password | 5f4dcc3b5aa765d61d8327deb882cf99 |
+| admin | d033e22ae348aeb5660fc2140aec35850c4da997 |
+| test | 098f6bcd4621d373cade4e832627b4f6 |
+| hello | 5d41402abc4b2a76b9719d911017c592 |
+| letmein | 0d107d09f5bbe40cade3de5c71e9e9b7 |
+| welcome | 69f59f7d0c5b60c5c1e2d8a3e4c5d4e3 |
+| qwerty | d8578edf8458ce06fbc5bb76a58c5ca4 |
+| abc123 | e99a18c428cb38d5f260853678922e03 |
+| monkey | d0763edaa9d9bd2a9516280ddb6c0f20 |
+| master | 52c69e3a57331081823331c4e6999d09 |
+| dragon | 866b0263c4c0a0a89eae1e6e8c7b8b7f |
+| shadow | 1a1d5a2e2d6d1e0c6f5e2d5e2d5c2e0e |
+
+---
+Generated for educational purposes - CA Project

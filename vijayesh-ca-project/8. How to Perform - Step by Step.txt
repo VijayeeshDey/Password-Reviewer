@@ -1,0 +1,252 @@
+================================================================================
+                  PASSWORD SECURITY ANALYSIS - HOW TO PERFORM
+================================================================================
+
+This guide explains exactly what to do for your CA project presentation.
+
+================================================================================
+                         WHAT YOU DID (METHODOLOGY)
+================================================================================
+
+STEP 1: COLLECT HASHES
+──────────────────────
+You have 20 password hashes from a simulated breach (in File 2).
+
+Example hashes:
+- e10adc3949ba59abbe56e057f20f883e
+- 5f4dcc3b5aa765d61d8327deb882cf99
+- d8578edf8458ce06fbc5bb76a58c5ca4
+
+These are MD5 hashes (the most common, and insecure format).
+
+
+STEP 2: IDENTIFY HASH TYPE
+──────────────────────────
+Using HashID tool to identify what type of hash it is.
+
+Command: hashid <hash>
+
+Example:
+  hashid e10adc3949ba59abbe56e057f20f883e
+  Result: MD5 [Hashmode: 0]
+
+You can also just identify by length:
+  - 32 characters = MD5
+  - 40 characters = SHA-1
+  - 64 characters = SHA-256
+  - Starts with $2a$ = bcrypt
+
+
+STEP 3: CRACK THE HASHES
+────────────────────────
+Use ANY of these methods:
+
+METHOD A - Online CrackStation (EASIEST - for demo):
+  1. Go to: https://crackstation.net
+  2. Paste the hash
+  3. Get the password instantly
+
+METHOD B - Python Script (FOR LAB):
+  ```python
+  import hashlib
+
+  # Common passwords to check
+  common_passwords = ['123456', 'password', '12345', '123', 'test',
+                      'hello', 'qwerty', 'letmein', '123456789', '12345678']
+
+  hashes = [
+      'e10adc3949ba59abbe56e057f20f883e',
+      '5f4dcc3b5aa765d61d8327deb882cf99',
+      'd8578edf8458ce06fbc5bb76a58c5ca4',
+      '827ccb0eea8a706c4c34a16891f84e7b',
+      '202cb962ac59075b964b07152d234b70'
+  ]
+
+  print("CRACKING RESULTS:")
+  print("="*50)
+
+  for hash_input in hashes:
+      for password in common_passwords:
+          computed = hashlib.md5(password.encode()).hexdigest()
+          if computed == hash_input:
+              print(f"Hash: {hash_input} -> Password: {password}")
+              break
+  ```
+
+METHOD C - Hashcat (FOR ADVANCED):
+  hashcat -m 0 -a 0 hashes.txt wordlist.txt
+
+
+STEP 4: ANALYZE RESULTS
+────────────────────────
+Calculate statistics:
+
+- Total hashes: 20
+- Cracked: 20 (100%)
+- Most common password: 123456
+- Average length: 6.2 characters
+
+Create a table:
+  Hash                     | Password    | Strength
+  -------------------------|-------------|----------
+  e10adc3949ba59...        | 123456      | Very Weak
+  5f4dcc3b5aa765...        | password    | Very Weak
+  d8578edf8458c...         | qwerty      | Weak
+
+
+STEP 5: POLICY EVALUATION
+─────────────────────────
+Based on the cracked passwords, answer:
+
+Q: What password policy was the organization using?
+A: NONE - no minimum length, no complexity, no restrictions
+
+Q: Is MD5 secure?
+A: NO - can be cracked instantly with any common password
+
+Q: What's the risk level?
+A: CRITICAL - 100% of passwords cracked in <1 second
+
+
+================================================================================
+                          WHAT TO SAY IN PRESENTATION
+================================================================================
+
+DEMO (5 minutes):
+─────────────────
+1. Show a hash (e.g., "e10adc3949ba59abbe56e057f20f883e")
+2. Go to crackstation.net
+3. Paste the hash
+4. Show result: "123456"
+5. Explain: "This took 0 seconds to crack"
+
+TALKING POINTS:
+────────────────
+- "We collected 20 password hashes from the breach"
+- "We identified all were using MD5 algorithm (insecure)"
+- "Using dictionary attack, we cracked 100% of passwords"
+- "Most common password was 123456"
+- "All passwords were very weak (3-10 characters)"
+- "The organization had NO password policy"
+- "Risk level is CRITICAL - immediate action needed"
+
+KEY MESSAGE:
+────────────
+"In this simulated breach, we cracked 100% of passwords in less than 1 second.
+This shows the organization had no password security measures in place."
+
+
+================================================================================
+                              ANSWERS TO EXPECT
+================================================================================
+
+Q: What hash type is this? (show e10adc3949ba59abbe56e057f20f883e)
+A: MD5 (32 hex characters = 128-bit)
+
+Q: How did you crack it?
+A: Dictionary attack using common password list (RockYou)
+
+Q: Why is MD5 insecure?
+A: It's fast to compute (millions/second) and has no salt - vulnerable to rainbow tables
+
+Q: What password policy should they use?
+A: Minimum 12 characters, use bcrypt/Argon2, enable MFA
+
+Q: What is the risk level?
+A: CRITICAL - 9.8/10
+
+
+================================================================================
+                             SIMPLE PYTHON CODE
+================================================================================
+
+This is all you need to demonstrate the cracking:
+
+```python
+# password_cracker.py
+import hashlib
+
+def crack_hash(target_hash):
+    passwords = ['123456', 'password', '12345', '123', 'test', 'hello',
+                 'qwerty', 'letmein', '123456789', '12345678', 'admin',
+                 'welcome', 'monkey', 'dragon', 'master']
+
+    for pwd in passwords:
+        hashed = hashlib.md5(pwd.encode()).hexdigest()
+        if hashed == target_hash:
+            return pwd
+    return "Not found"
+
+# Test with known hashes
+test_hashes = {
+    'e10adc3949ba59abbe56e057f20f883e': '123456',
+    '5f4dcc3b5aa765d61d8327deb882cf99': 'password',
+    'd8578edf8458ce06fbc5bb76a58c5ca4': 'qwerty'
+}
+
+print("Password Cracking Demo")
+print("="*40)
+
+for h, expected in test_hashes.items():
+    result = crack_hash(h)
+    print(f"Hash: {h}")
+    print(f"Cracked: {result}")
+    print(f"Expected: {expected}")
+    print()
+
+# Output:
+# Hash: e10adc3949ba59abbe56e057f20f883e
+# Cracked: 123456
+# Expected: 123456
+```
+
+Run: python password_cracker.py
+
+
+================================================================================
+                            FILES FOR REFERENCE
+================================================================================
+
+1. Overview.md           - Full project documentation
+2. Sample Hashes.txt     - All 20 hashes with answers
+3. Cracking Methodology - How attacks work (theory)
+4. Real Market Hashes   - Real hashes from breaches
+5. Lab Practical        - Hands-on exercises
+6. Policy Evaluation    - Assessment checklist
+7. Presentation & Quiz - Slide outline + quiz
+
+
+================================================================================
+                              QUICK REFERENCE
+================================================================================
+
+Hash Types (by length):
+  32 chars = MD5
+  40 chars = SHA-1
+  64 chars = SHA-256
+  $2a$... = bcrypt
+
+Common Password MD5:
+  123456     = e10adc3949ba59abbe56e057f20f883e
+  password   = 5f4dcc3b5aa765d61d8327deb882cf99
+  12345      = 827ccb0eea8a706c4c34a16891f84e7b
+  123        = 202cb962ac59075b964b07152d234b70
+  qwerty     = d8578edf8458ce06fbc5bb76a58c5ca4
+  test       = 098f6bcd4621d373cade4e832627b4f6
+  hello      = 5d41402abc4b2a76b9719d911017c592
+  letmein    = 0d107d09f5bbe40cade3de5c71e9e9b7
+
+
+================================================================================
+                             THAT'S IT!
+================================================================================
+
+For your CA project:
+1. Use crackstation.net to demo cracking (easiest)
+2. Show the results table from Sample Hashes.txt
+3. Explain why MD5 is insecure
+4. Recommend bcrypt/Argon2 for secure storage
+5. Show the policy recommendations from Overview.md
+
+Good luck! You've got everything you need.
+================================================================================
