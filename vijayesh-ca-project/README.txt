@@ -75,11 +75,4 @@ OPTION B - PYTHON DEMO (Recommended)
 
 
 
-================================================================================
-                              GOOD LUCK!
-================================================================================
 
-All materials are in: C:\Users\mohak\Desktop\vijayesh-ca-project\
-
-Just open "8. How to Perform.txt" for the complete step-by-step guide.
-================================================================================
